@@ -1,7 +1,14 @@
 package br.com.superheroes
 
-import android.app.Application
+import br.com.superheroes.library.injector.DaggerSuperHeroesComponent
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
-class SuperHeroesApp : Application() {
+class SuperHeroesApp : DaggerApplication() {
 
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerSuperHeroesComponent.builder()
+            .application(this)
+            .build()
+    }
 }
