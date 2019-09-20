@@ -2,22 +2,29 @@ package br.com.superheroes.data.search
 
 import br.com.superheroes.data.model.CharacterDataWrapper
 import br.com.superheroes.domain.search.CharactersRepository
-import br.com.superheroes.library.retrofit.endpoint.GetCharactersEndPoint
+import br.com.superheroes.library.extension.md5
+import br.com.superheroes.library.retrofit.endpoint.SearchCharactersEndpoint
 import io.reactivex.Single
 import javax.inject.Inject
 
 class RemoteCharactersRepository @Inject constructor(
-    private val getCharactersEndPoint: GetCharactersEndPoint
+    private val searchCharactersEndpoint: SearchCharactersEndpoint
 ) : CharactersRepository {
     override fun fetchCharacters(
         charactersRequest: SearchCharactersRequest
     ): Single<CharacterDataWrapper> {
-        return getCharactersEndPoint.searchCharacters(
+
+        val hash =
+            "${charactersRequest.ts}${charactersRequest.pvtKey}${charactersRequest.apiKey}".md5()
+
+        return searchCharactersEndpoint.searchCharacters(
             startWith = charactersRequest.namesStartWith,
             orderBy = charactersRequest.orderBy,
             limit = charactersRequest.limit,
             offset = charactersRequest.offset,
-            apiKey = charactersRequest.apiKey
+            apiKey = charactersRequest.apiKey,
+            ts = charactersRequest.ts,
+            hash = hash
         ).map { response ->
             when (response.code()) {
                 200 -> {

@@ -13,6 +13,7 @@ class EnvironmentConfig @Inject constructor() {
     private val configName: ConfigName = safeEnumValueOf(BuildConfig.FLAVOR, ConfigName.PRODUCTION)
     val baseUrl: String
     val apiKey = "656ace3b6053ed496242e3d3f7dca830"
+    val pvtKey = "f397d02d1f002af3626143143af1916b329a5abf"
 
     init {
         baseUrl = when (configName) {

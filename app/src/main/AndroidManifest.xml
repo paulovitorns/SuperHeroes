@@ -33,5 +33,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".screen.home.HomeActivity"
+            android:theme="@style/AppTheme.FullBackgroundColor.Orange" />
+
     </application>
+
 </manifest>

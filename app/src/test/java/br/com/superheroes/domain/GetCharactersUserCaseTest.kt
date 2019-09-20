@@ -2,7 +2,6 @@ package br.com.superheroes.domain
 
 import br.com.superheroes.data.model.CharacterDataWrapper
 import br.com.superheroes.data.search.SearchCharactersRequest
-import br.com.superheroes.domain.config.EnvironmentConfig
 import br.com.superheroes.domain.search.CharactersRepository
 import br.com.superheroes.domain.search.GetCharactersUserCase
 import br.com.superheroes.library.reactivex.TestSchedulerProvider
@@ -20,7 +19,6 @@ class GetCharactersUserCaseTest {
 
     private val getCharactersUserCase = GetCharactersUserCase(
         charactersRepository,
-        EnvironmentConfig(),
         schedulerProvider
     )
 
@@ -29,7 +27,8 @@ class GetCharactersUserCaseTest {
         val request = SearchCharactersRequest(
             namesStartWith = "",
             offset = 0,
-            apiKey = ""
+            apiKey = "",
+            pvtKey = ""
         )
 
         getCharactersUserCase(request)
@@ -47,7 +46,8 @@ class GetCharactersUserCaseTest {
         val request = SearchCharactersRequest(
             namesStartWith = "Spider-Man",
             offset = 0,
-            apiKey = "656ace3b6053ed496242e3d3f7dca830"
+            apiKey = "",
+            pvtKey = ""
         )
 
         val result = CharacterDataWrapper()
@@ -60,7 +60,7 @@ class GetCharactersUserCaseTest {
             .test()
             .assertNoErrors()
             .assertComplete()
-            .assertValue(result.data.results)
+            .assertValue(result.data)
             .awaitTerminalEvent()
 
         verify(charactersRepository).fetchCharacters(request)
