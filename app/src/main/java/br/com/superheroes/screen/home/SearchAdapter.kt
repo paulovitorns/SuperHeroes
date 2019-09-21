@@ -12,11 +12,8 @@ import br.com.superheroes.data.model.Character
 import br.com.superheroes.library.recyclerview.SimpleAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import kotlinx.android.synthetic.main.search_item.view.forks
-import kotlinx.android.synthetic.main.search_item.view.ownerImage
-import kotlinx.android.synthetic.main.search_item.view.ownerName
-import kotlinx.android.synthetic.main.search_item.view.repository
-import kotlinx.android.synthetic.main.search_item.view.stars
+import kotlinx.android.synthetic.main.search_item.view.heroImage
+import kotlinx.android.synthetic.main.search_item.view.superHero
 
 class SearchAdapter(
     private val context: Context,
@@ -31,9 +28,7 @@ class SearchAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int, item: Character) {
         with(holder) {
-            repository.text = item.name
-//            stars.text = item.stargazersCount.toString()
-//            forks.text = item.forksCount.toString()
+            superHero.text = item.name
 
             val thumbnails =
                 "${item.thumbnail.path}.${item.thumbnail.extension}".replace("http", "https")
@@ -42,17 +37,12 @@ class SearchAdapter(
                 .load(thumbnails)
                 .placeholder(R.drawable.hydra_placeholer)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                .into(ownerImage)
-
-//            ownerName.text = item.owner.login
+                .into(heroImage)
         }
     }
 
     inner class ViewHolder(itemVIew: View) : RecyclerView.ViewHolder(itemVIew) {
-        val ownerImage: ImageView = itemVIew.ownerImage
-        val repository: TextView = itemVIew.repository
-        val stars: TextView = itemVIew.stars
-        val forks: TextView = itemVIew.forks
-        val ownerName: TextView = itemVIew.ownerName
+        val heroImage: ImageView = itemVIew.heroImage
+        val superHero: TextView = itemVIew.superHero
     }
 }

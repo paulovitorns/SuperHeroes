@@ -3,102 +3,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="250dp"
     android:layout_margin="4dp"
     android:foreground="?attr/selectableItemBackgroundBorderless"
     app:cardCornerRadius="5dp"
     app:cardElevation="2dp"
     app:cardUseCompatPadding="true"
-    app:contentPadding="16dp">
+    app:contentPadding="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
 
         <ImageView
-            android:id="@+id/ownerImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/heroImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="16dp"
             android:contentDescription="@null"
             android:scaleType="fitCenter"
             android:src="@drawable/hydra_placeholer"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/superHero"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/repository" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/repository"
-            style="@style/TextHeadline.Medium"
+            android:id="@+id/superHero"
+            style="@style/TextSubHead"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="14dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/ownerImage"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Repositório 1234" />
-
-        <ImageView
-            android:id="@+id/star"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_star"
-            app:layout_constraintStart_toEndOf="@id/ownerImage"
-            app:layout_constraintTop_toBottomOf="@id/repository" />
-
-        <TextView
-            android:id="@+id/stars"
-            style="@style/Text.Body.Medium"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:textAlignment="textStart"
-            app:layout_constraintBottom_toBottomOf="@id/star"
-            app:layout_constraintStart_toEndOf="@id/star"
-            app:layout_constraintTop_toTopOf="@id/star"
-            tools:text="1234567" />
-
-        <ImageView
-            android:id="@+id/fork"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_repo_forked"
-            app:layout_constraintStart_toEndOf="@id/stars"
-            app:layout_constraintTop_toBottomOf="@id/repository" />
-
-        <TextView
-            android:id="@+id/forks"
-            style="@style/Text.Body.Medium"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            android:textAlignment="textStart"
-            app:layout_constraintBottom_toBottomOf="@id/fork"
-            app:layout_constraintStart_toEndOf="@id/fork"
-            app:layout_constraintTop_toTopOf="@id/fork"
-            tools:text="1234567" />
-
-        <TextView
-            android:id="@+id/ownerName"
-            style="@style/Text.Title.Medium"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/ownerImage"
-            app:layout_constraintTop_toBottomOf="@id/stars"
-            tools:text="Paulo Sales" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Spider-Man" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

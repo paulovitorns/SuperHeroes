@@ -6,6 +6,7 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.StyleSpan
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.superheroes.R
@@ -43,7 +44,14 @@ interface HomeUi : BaseUi {
 class HomeActivity : BaseActivity<HomePresenter>(), HomeUi {
 
     override val layoutRes: Int? = R.layout.activity_home
-    private val linearLayoutManager by lazy { LinearLayoutManager(this) }
+    private val gridLayoutManage by lazy {
+        GridLayoutManager(
+            this,
+            2,
+            GridLayoutManager.VERTICAL,
+            false
+        )
+    }
     private val searchAdapter by lazy { SearchAdapter(this) }
     private var lastRecyclerPosition = 0
 
@@ -64,7 +72,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeUi {
         }
 
         with(recyclerView) {
-            layoutManager = linearLayoutManager
+            layoutManager = gridLayoutManage
             adapter = searchAdapter
         }
 
@@ -134,7 +142,7 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeUi {
     override fun showSearchError(queryString: String) {
         hideRecycler()
 
-        val descriptionFormatted = notFoundDescription.text.toString().format(queryString)
+        val descriptionFormatted = getString(R.string.search_not_found_description).format(queryString)
 
         // This will set the queryString to bold
         val spannableString = SpannableString(descriptionFormatted).apply {

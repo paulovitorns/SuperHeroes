@@ -98,7 +98,6 @@ class HomePresenterTest {
         verify(getCharactersUserCase).invoke(presenter.searchViewState.request)
     }
 
-
     @Test
     fun `success on load next page of a GitHub search result`() {
         val expectedItems = CharacterDataContainer(results = listOf(Character(), Character()))
@@ -141,7 +140,6 @@ class HomePresenterTest {
         verify(homeView, times(2)).hideProgress()
         verify(getCharactersUserCase).invoke(presenter.searchViewState.request)
     }
-
 
     @Test
     fun `show result not found state to a DC hero query`() {
