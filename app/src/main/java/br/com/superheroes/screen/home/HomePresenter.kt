@@ -63,8 +63,7 @@ class HomePresenter @Inject constructor(
 
                 val request = searchViewState.request.copy(
                     offset = 0,
-                    namesStartWith = queryString,
-                    ts = currentDate().time
+                    namesStartWith = queryString
                 )
                 searchViewState = SearchViewState.Builder(searchViewState)
                     .setRequest(request)
@@ -83,7 +82,7 @@ class HomePresenter @Inject constructor(
 
         homeUi?.showProgress()
 
-        val request = searchViewState.request.copy(ts = currentDate().time)
+        val request = searchViewState.request
         searchViewState = SearchViewState.Builder(searchViewState)
             .setRequest(request)
             .build()
@@ -117,7 +116,7 @@ class HomePresenter @Inject constructor(
         val limit = searchViewState.request.limit
         val currentOffset = searchViewState.request.offset
         val request =
-            searchViewState.request.copy(offset = currentOffset + limit, ts = currentDate().time)
+            searchViewState.request.copy(offset = currentOffset + limit)
 
         searchViewState = SearchViewState.Builder(searchViewState)
             .setRequest(request)
