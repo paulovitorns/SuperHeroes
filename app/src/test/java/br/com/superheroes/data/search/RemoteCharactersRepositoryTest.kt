@@ -1,10 +1,9 @@
-package br.com.superheroes.data
+package br.com.superheroes.data.search
 
 import br.com.superheroes.data.model.CharacterDataContainer
 import br.com.superheroes.data.model.CharacterDataWrapper
-import br.com.superheroes.data.search.RemoteCharactersRepository
-import br.com.superheroes.data.search.ResultNotFoundException
-import br.com.superheroes.data.search.SearchCharactersRequest
+import br.com.superheroes.data.model.ResultNotFoundException
+import br.com.superheroes.data.model.SignData
 import br.com.superheroes.library.extension.md5
 import br.com.superheroes.library.retrofit.endpoint.SearchCharactersEndpoint
 import com.nhaarman.mockitokotlin2.given
@@ -25,12 +24,11 @@ class RemoteCharactersRepositoryTest {
         val request = SearchCharactersRequest(
             namesStartWith = "Spider-Man",
             offset = 0,
-            apiKey = "",
-            pvtKey = ""
+            signData = SignData("", "")
         )
 
         val result = CharacterDataWrapper(data = CharacterDataContainer(count = 10))
-        val hash = "${request.ts}${request.pvtKey}${request.apiKey}".md5()
+        val hash = "${request.signData.ts}${request.signData.pvtKey}${request.signData.apiKey}".md5()
 
         given {
             getCharactersEndPoint.searchCharacters(
@@ -38,8 +36,8 @@ class RemoteCharactersRepositoryTest {
                 orderBy = request.orderBy,
                 limit = request.limit,
                 offset = request.offset,
-                apiKey = request.apiKey,
-                ts = request.ts,
+                apiKey = request.signData.apiKey,
+                ts = request.signData.ts,
                 hash = hash
             )
         }.willReturn { Single.just(Response.success(200, result)) }
@@ -56,8 +54,8 @@ class RemoteCharactersRepositoryTest {
             orderBy = request.orderBy,
             limit = request.limit,
             offset = request.offset,
-            apiKey = request.apiKey,
-            ts = request.ts,
+            apiKey = request.signData.apiKey,
+            ts = request.signData.ts,
             hash = hash
         )
     }
@@ -67,12 +65,11 @@ class RemoteCharactersRepositoryTest {
         val request = SearchCharactersRequest(
             namesStartWith = "Spider-Man",
             offset = 10,
-            apiKey = "",
-            pvtKey = ""
+            signData = SignData("", "")
         )
 
         val result = CharacterDataWrapper(data = CharacterDataContainer(count = 20))
-        val hash = "${request.ts}${request.pvtKey}${request.apiKey}".md5()
+        val hash = "${request.signData.ts}${request.signData.pvtKey}${request.signData.apiKey}".md5()
 
         given {
             getCharactersEndPoint.searchCharacters(
@@ -80,8 +77,8 @@ class RemoteCharactersRepositoryTest {
                 orderBy = request.orderBy,
                 limit = request.limit,
                 offset = request.offset,
-                apiKey = request.apiKey,
-                ts = request.ts,
+                apiKey = request.signData.apiKey,
+                ts = request.signData.ts,
                 hash = hash
             )
         }.willReturn { Single.just(Response.success(200, result)) }
@@ -98,8 +95,8 @@ class RemoteCharactersRepositoryTest {
             orderBy = request.orderBy,
             limit = request.limit,
             offset = request.offset,
-            apiKey = request.apiKey,
-            ts = request.ts,
+            apiKey = request.signData.apiKey,
+            ts = request.signData.ts,
             hash = hash
         )
     }
@@ -109,12 +106,11 @@ class RemoteCharactersRepositoryTest {
         val request = SearchCharactersRequest(
             namesStartWith = "Superman",
             offset = 10,
-            apiKey = "",
-            pvtKey = ""
+            signData = SignData("", "")
         )
 
         val result = CharacterDataWrapper()
-        val hash = "${request.ts}${request.pvtKey}${request.apiKey}".md5()
+        val hash = "${request.signData.ts}${request.signData.pvtKey}${request.signData.apiKey}".md5()
 
         given {
             getCharactersEndPoint.searchCharacters(
@@ -122,8 +118,8 @@ class RemoteCharactersRepositoryTest {
                 orderBy = request.orderBy,
                 limit = request.limit,
                 offset = request.offset,
-                apiKey = request.apiKey,
-                ts = request.ts,
+                apiKey = request.signData.apiKey,
+                ts = request.signData.ts,
                 hash = hash
             )
         }.willReturn { Single.just(Response.success(200, result)) }
@@ -140,8 +136,8 @@ class RemoteCharactersRepositoryTest {
             orderBy = request.orderBy,
             limit = request.limit,
             offset = request.offset,
-            apiKey = request.apiKey,
-            ts = request.ts,
+            apiKey = request.signData.apiKey,
+            ts = request.signData.ts,
             hash = hash
         )
     }

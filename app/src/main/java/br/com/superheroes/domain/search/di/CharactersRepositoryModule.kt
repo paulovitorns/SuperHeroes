@@ -3,11 +3,11 @@ package br.com.superheroes.domain.search.di
 import br.com.superheroes.data.search.RemoteCharactersRepository
 import br.com.superheroes.domain.search.CharactersRepository
 import br.com.superheroes.library.injector.ActivityScope
-import br.com.superheroes.library.retrofit.di.GetCharactersEndpointModule
+import br.com.superheroes.library.retrofit.di.SearchCharactersEndpointModule
 import dagger.Binds
 import dagger.Module
 
-@Module(includes = [GetCharactersEndpointModule::class])
+@Module(includes = [SearchCharactersEndpointModule::class])
 abstract class CharactersRepositoryModule {
 
     @ActivityScope

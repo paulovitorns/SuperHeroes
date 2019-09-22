@@ -1,9 +1,8 @@
-package br.com.superheroes.domain
+package br.com.superheroes.domain.search
 
 import br.com.superheroes.data.model.CharacterDataWrapper
+import br.com.superheroes.data.model.SignData
 import br.com.superheroes.data.search.SearchCharactersRequest
-import br.com.superheroes.domain.search.CharactersRepository
-import br.com.superheroes.domain.search.GetCharactersUserCase
 import br.com.superheroes.library.reactivex.TestSchedulerProvider
 import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.mock
@@ -27,8 +26,7 @@ class GetCharactersUserCaseTest {
         val request = SearchCharactersRequest(
             namesStartWith = "",
             offset = 0,
-            apiKey = "",
-            pvtKey = ""
+            signData = SignData("", "")
         )
 
         getCharactersUserCase(request)
@@ -46,8 +44,7 @@ class GetCharactersUserCaseTest {
         val request = SearchCharactersRequest(
             namesStartWith = "Spider-Man",
             offset = 0,
-            apiKey = "",
-            pvtKey = ""
+            signData = SignData("", "")
         )
 
         val result = CharacterDataWrapper()

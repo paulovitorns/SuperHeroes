@@ -3,21 +3,21 @@ package br.com.superheroes.library.retrofit.di
 import br.com.superheroes.domain.config.EnvironmentConfig
 import br.com.superheroes.library.injector.ActivityScope
 import br.com.superheroes.library.retrofit.RetrofitFactory
-import br.com.superheroes.library.retrofit.endpoint.SearchCharactersEndpoint
+import br.com.superheroes.library.retrofit.endpoint.SearchHeroComicsEndpoint
 import dagger.Module
 import dagger.Provides
 import kotlinx.serialization.UnstableDefault
 
 @Module
-class GetCharactersEndpointModule {
+class SearchHeroComicsEndpointModule {
 
     @UnstableDefault
     @ActivityScope
     @Provides
-    fun provideGetCharactersEndPoint(
+    fun provideSearchHeroComicsEndPoint(
         retrofitFactory: RetrofitFactory
-    ): SearchCharactersEndpoint {
+    ): SearchHeroComicsEndpoint {
         val baseUrl = EnvironmentConfig().baseUrl
-        return retrofitFactory.create(SearchCharactersEndpoint::class.java, baseUrl)
+        return retrofitFactory.create(SearchHeroComicsEndpoint::class.java, baseUrl)
     }
 }

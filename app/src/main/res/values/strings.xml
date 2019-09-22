@@ -8,4 +8,8 @@
     <string name="search_not_found_title">Hmm, foi mal!</string>
     <string name="search_not_found_description">Não encontramos nenhum super-herói para essa palavra-chave %s</string>
     <string name="generic_error_message">Alguma coisa deu errado, por favor, verifique a sua palavra-chave usada na busca.</string>
+
+    <string name="section_description">Descrição</string>
+    <string name="section_comics">Comics</string>
+    <string name="section_series">Series</string>
 </resources>

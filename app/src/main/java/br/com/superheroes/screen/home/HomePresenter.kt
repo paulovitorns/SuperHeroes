@@ -3,7 +3,8 @@ package br.com.superheroes.screen.home
 import androidx.annotation.VisibleForTesting
 import br.com.superheroes.data.model.Character
 import br.com.superheroes.data.model.CharacterDataContainer
-import br.com.superheroes.data.search.ResultNotFoundException
+import br.com.superheroes.data.model.ResultNotFoundException
+import br.com.superheroes.data.model.SignData
 import br.com.superheroes.data.search.SearchCharactersRequest
 import br.com.superheroes.domain.config.EnvironmentConfig
 import br.com.superheroes.domain.search.GetCharactersUserCase
@@ -14,6 +15,7 @@ import br.com.superheroes.library.reactivex.addDisposableTo
 import br.com.superheroes.library.state.StateStore
 import br.com.superheroes.screen.BasePresenter
 import br.com.superheroes.screen.BaseUi
+import br.com.superheroes.screen.detail.HeroUi
 import io.reactivex.Single
 import java.net.UnknownHostException
 import java.util.concurrent.TimeUnit
@@ -34,9 +36,11 @@ class HomePresenter @Inject constructor(
         .Builder(SearchViewState())
         .setRequest(
             SearchCharactersRequest(
-                apiKey = environmentConfig.apiKey,
-                pvtKey = environmentConfig.pvtKey,
-                ts = currentDate().time
+                signData = SignData(
+                    apiKey = environmentConfig.apiKey,
+                    pvtKey = environmentConfig.pvtKey,
+                    ts = currentDate().time
+                )
             )
         )
         .build()
@@ -131,7 +135,8 @@ class HomePresenter @Inject constructor(
     }
 
     fun onCharacterSelected(character: Character) {
-        homeUi?.openCharacterDetail(character)
+        stateStore.save(HeroUi::class, character)
+        homeUi?.openCharacterDetail()
     }
 
     private fun restoreStateOrLoadDefaultQuery() {

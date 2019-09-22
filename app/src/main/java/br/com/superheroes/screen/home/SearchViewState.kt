@@ -1,11 +1,12 @@
 package br.com.superheroes.screen.home
 
 import br.com.superheroes.data.model.CharacterDataContainer
+import br.com.superheroes.data.model.SignData
 import br.com.superheroes.data.search.SearchCharactersRequest
 
 data class SearchViewState(
     // stored the request model
-    val request: SearchCharactersRequest = SearchCharactersRequest(apiKey = "", pvtKey = ""),
+    val request: SearchCharactersRequest = SearchCharactersRequest(signData = SignData("", "")),
     // indicates that's has loaded all the pages
     val hasLoadedAllPages: Boolean = false,
     // used to store data result from search repositories or loaded a next repositories page

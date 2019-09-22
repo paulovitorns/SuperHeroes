@@ -2,7 +2,7 @@ package br.com.superheroes.screen.home
 
 import br.com.superheroes.data.model.Character
 import br.com.superheroes.data.model.CharacterDataContainer
-import br.com.superheroes.data.search.ResultNotFoundException
+import br.com.superheroes.data.model.ResultNotFoundException
 import br.com.superheroes.domain.config.EnvironmentConfig
 import br.com.superheroes.domain.search.GetCharactersUserCase
 import br.com.superheroes.library.reactivex.DisposeBag

@@ -26,7 +26,7 @@ data class Character(
     val description: String = "",
     val resourceURI: String = "",
     val urls: List<Url> = emptyList(),
-    val thumbnail: Image = Image(),
+    val thumbnail: Thumbnail = Thumbnail(),
     val comics: ComicList = ComicList(),
     val series: SeriesList = SeriesList()
 )
@@ -38,7 +38,7 @@ data class Url(
 )
 
 @Serializable
-data class Image(
+data class Thumbnail(
     val path: String = "",
     val extension: String = ""
 )

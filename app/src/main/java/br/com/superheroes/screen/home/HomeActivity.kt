@@ -1,5 +1,6 @@
 package br.com.superheroes.screen.home
 
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableString
@@ -15,6 +16,7 @@ import br.com.superheroes.library.extension.hideKeyboard
 import br.com.superheroes.library.extension.toast
 import br.com.superheroes.screen.BaseActivity
 import br.com.superheroes.screen.BaseUi
+import br.com.superheroes.screen.detail.HeroActivity
 import com.jakewharton.rxbinding3.widget.queryTextChanges
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_home.defaultError
@@ -38,7 +40,7 @@ interface HomeUi : BaseUi {
     fun showOfflineState()
     fun showDefaultError()
     fun hideAllErrorState()
-    fun openCharacterDetail(character: Character)
+    fun openCharacterDetail()
 }
 
 class HomeActivity : BaseActivity<HomePresenter>(), HomeUi {
@@ -142,7 +144,8 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeUi {
     override fun showSearchError(queryString: String) {
         hideRecycler()
 
-        val descriptionFormatted = getString(R.string.search_not_found_description).format(queryString)
+        val descriptionFormatted =
+            getString(R.string.search_not_found_description).format(queryString)
 
         // This will set the queryString to bold
         val spannableString = SpannableString(descriptionFormatted).apply {
@@ -180,10 +183,10 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeUi {
         hideOfflineState()
     }
 
-    override fun openCharacterDetail(character: Character) {
-//        Intent(Intent.ACTION_VIEW, Uri.parse(url)).also {
-//            startActivity(it)
-//        }
+    override fun openCharacterDetail() {
+        Intent(this, HeroActivity::class.java).also {
+            startActivity(it)
+        }
     }
 
     private fun hideRecycler() {
