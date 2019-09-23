@@ -4,6 +4,8 @@ import br.com.superheroes.data.model.Character
 import br.com.superheroes.data.model.CharacterDataContainer
 import br.com.superheroes.data.model.ResultNotFoundException
 import br.com.superheroes.domain.config.EnvironmentConfig
+import br.com.superheroes.domain.favorite.AddFavoriteUseCase
+import br.com.superheroes.domain.favorite.RemoveFavoriteUseCase
 import br.com.superheroes.domain.search.GetCharactersUserCase
 import br.com.superheroes.library.reactivex.DisposeBag
 import br.com.superheroes.library.reactivex.TestSchedulerProvider
@@ -25,10 +27,15 @@ class HomePresenterTest {
     private val stateStore = mock<StateStore>()
     private val environmentConfig = EnvironmentConfig()
     private val homeView = mock<HomeUi>()
+    private val addFavorite = mock<AddFavoriteUseCase>()
+    private val removeFavorite = mock<RemoveFavoriteUseCase>()
+
     private val presenter = HomePresenter(
         environmentConfig,
         getCharactersUserCase,
         schedulerProvider,
+        addFavorite,
+        removeFavorite,
         stateStore
     ).apply {
         disposeBag = DisposeBag()

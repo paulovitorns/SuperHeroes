@@ -71,7 +71,7 @@ class RemoteCharactersRepositoryTest {
         val hash = "${request.signData.ts}${request.signData.pvtKey}${request.signData.apiKey}".md5()
 
         given {
-            getCharactersEndPoint.searchCharactersWithoutRed(
+            getCharactersEndPoint.searchCharactersWithoutReference(
                 orderBy = request.orderBy,
                 limit = request.limit,
                 offset = request.offset,
@@ -88,7 +88,7 @@ class RemoteCharactersRepositoryTest {
             .assertValue(result)
             .awaitTerminalEvent()
 
-        verify(getCharactersEndPoint).searchCharactersWithoutRed(
+        verify(getCharactersEndPoint).searchCharactersWithoutReference(
             orderBy = request.orderBy,
             limit = request.limit,
             offset = request.offset,

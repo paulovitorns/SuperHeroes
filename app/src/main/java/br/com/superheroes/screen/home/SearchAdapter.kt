@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
@@ -13,13 +14,16 @@ import br.com.superheroes.data.model.Character
 import br.com.superheroes.library.recyclerview.SimpleAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import kotlinx.android.synthetic.main.search_item.view.favButton
 import kotlinx.android.synthetic.main.search_item.view.heroImage
 import kotlinx.android.synthetic.main.search_item.view.superHero
 
 class SearchAdapter(
     private val context: Context,
-    characters: MutableList<Character> = mutableListOf()
-) : SimpleAdapter<Character, SearchAdapter.ViewHolder>(characters) {
+    characters: List<Character> = mutableListOf()
+) : SimpleAdapter<Character, SearchAdapter.ViewHolder>(characters.toMutableList()) {
+
+    var onFavoriteClicked: ((item: Character) -> Unit)? = null
 
     override fun onCreateItemViewHolder(parent: ViewGroup): ViewHolder {
         val searchItemView = LayoutInflater.from(parent.context)
@@ -39,6 +43,20 @@ class SearchAdapter(
                 .placeholder(R.drawable.hydra_placeholer)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .into(heroImage)
+
+            favButton.setupFavButton(item.isFavorite)
+
+            favButton.setOnClickListener {
+                onFavoriteClicked?.invoke(item)
+            }
+        }
+    }
+
+    private fun ImageButton.setupFavButton(isFavorite: Boolean) {
+        if (isFavorite) {
+            this.setImageResource(R.drawable.ic_star_on)
+        } else {
+            this.setImageResource(R.drawable.ic_star_off)
         }
     }
 
@@ -76,7 +94,7 @@ class SearchAdapter(
                     val oldItem = oldItems.getOrNull(oldItemPosition)
                     val newItem = newItems[newItemPosition]
 
-                    return oldItem is Character && oldItem.id == newItem.id
+                    return oldItem is Character && oldItem == newItem
                 }
             }, false).dispatchUpdatesTo(this)
         }
@@ -85,5 +103,6 @@ class SearchAdapter(
     inner class ViewHolder(itemVIew: View) : RecyclerView.ViewHolder(itemVIew) {
         val heroImage: ImageView = itemVIew.heroImage
         val superHero: TextView = itemVIew.superHero
+        val favButton: ImageButton = itemVIew.favButton
     }
 }

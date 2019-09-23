@@ -7,11 +7,14 @@
     <string name="all_items_loaded">Já exibimos todos os heróis</string>
     <string name="all_comics_loaded">Já exibimos todos os quadrinhos</string>
     <string name="all_series_loaded">Já exibimos todos as séries</string>
-    <string name="search_not_found_title">Hmm, foi mal!</string>
+    <string name="search_not_found_title">Hmmm, foi mal!</string>
     <string name="search_not_found_description">Não encontramos nenhum super-herói para essa palavra-chave %s</string>
     <string name="generic_error_message">Alguma coisa deu errado, por favor, verifique a sua palavra-chave usada na busca.</string>
+    <string name="empty_favorite_title">Hmmm, sem favoritos...</string>
+    <string name="empty_favorito_description">Volte para a tela de busca e comece a favoritar seus heróis preferidos =)</string>
 
     <string name="section_description">Descrição</string>
     <string name="section_comics">Comics</string>
     <string name="section_series">Series</string>
+    <string name="favorites_title">Seus heróis favorites</string>
 </resources>

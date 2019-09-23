@@ -1,5 +1,6 @@
 package br.com.superheroes.screen.home
 
+import android.util.Log
 import androidx.annotation.VisibleForTesting
 import br.com.superheroes.data.model.Character
 import br.com.superheroes.data.model.CharacterDataContainer
@@ -7,6 +8,8 @@ import br.com.superheroes.data.model.ResultNotFoundException
 import br.com.superheroes.data.model.SignData
 import br.com.superheroes.data.search.SearchCharactersRequest
 import br.com.superheroes.domain.config.EnvironmentConfig
+import br.com.superheroes.domain.favorite.AddFavoriteUseCase
+import br.com.superheroes.domain.favorite.RemoveFavoriteUseCase
 import br.com.superheroes.domain.search.GetCharactersUserCase
 import br.com.superheroes.library.extension.currentDate
 import br.com.superheroes.library.injector.ActivityScope
@@ -26,6 +29,8 @@ class HomePresenter @Inject constructor(
     environmentConfig: EnvironmentConfig,
     private val getCharactersUserCase: GetCharactersUserCase,
     private val schedulerProvider: SchedulerProvider,
+    private val addFavorite: AddFavoriteUseCase,
+    private val removeFavorite: RemoveFavoriteUseCase,
     private val stateStore: StateStore
 ) : BasePresenter<BaseUi>() {
 
@@ -137,6 +142,44 @@ class HomePresenter @Inject constructor(
     fun onCharacterSelected(character: Character) {
         stateStore.save(HeroUi::class, character)
         homeUi?.openCharacterDetail()
+    }
+
+    fun tapOnFavoriteButton(character: Character) {
+        if (character.isFavorite) {
+            removeFavorite(character)
+                .subscribe({
+                    val items = searchViewState.searchResult.results.toMutableList()
+                    val itemIndex = items.indexOf(character)
+                    character.isFavorite = false
+                    items.removeAt(itemIndex)
+                    items.add(itemIndex, character)
+
+                    searchViewState = SearchViewState.Builder(searchViewState)
+                        .setSearchResult(searchViewState.searchResult.copy(results = items))
+                        .build()
+
+                    homeUi?.showSearchResult(searchViewState.searchResult.results)
+                }, {
+                    Log.e("Error_fav", it.message)
+                }).addDisposableTo(disposeBag)
+        } else {
+            addFavorite(character)
+                .subscribe({
+                    val items = searchViewState.searchResult.results.toMutableList()
+                    val itemIndex = items.indexOf(character)
+                    character.isFavorite = true
+                    items.removeAt(itemIndex)
+                    items.add(itemIndex, character)
+
+                    searchViewState = SearchViewState.Builder(searchViewState)
+                        .setSearchResult(searchViewState.searchResult.copy(results = items))
+                        .build()
+
+                    homeUi?.showSearchResult(searchViewState.searchResult.results)
+                }, {
+                    Log.e("Error_fav", it.message)
+                }).addDisposableTo(disposeBag)
+        }
     }
 
     private fun restoreStateOrLoadDefaultQuery() {

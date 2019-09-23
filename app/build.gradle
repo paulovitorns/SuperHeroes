@@ -101,6 +101,12 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     kapt 'com.github.bumptech.glide:compiler:4.9.0'
 
+
+    // Room
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
+    implementation "androidx.room:room-rxjava2:$room_version"
+
     androidTestImplementation "com.squareup.retrofit2:retrofit-mock:$retrofit_version"
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:$okhttp3_version"
 
@@ -117,7 +123,6 @@ dependencies {
 
     // Idling dependencies
     androidTestImplementation 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
-
 
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0', {

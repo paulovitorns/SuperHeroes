@@ -1,7 +1,6 @@
 package br.com.superheroes.library.retrofit.di
 
 import br.com.superheroes.domain.config.EnvironmentConfig
-import br.com.superheroes.library.injector.ActivityScope
 import br.com.superheroes.library.retrofit.RetrofitFactory
 import br.com.superheroes.library.retrofit.endpoint.SearchCharactersEndpoint
 import dagger.Module
@@ -12,7 +11,6 @@ import kotlinx.serialization.UnstableDefault
 class SearchCharactersEndpointModule {
 
     @UnstableDefault
-    @ActivityScope
     @Provides
     fun provideSearchCharactersEndPoint(
         retrofitFactory: RetrofitFactory

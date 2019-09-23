@@ -3,6 +3,7 @@ package br.com.superheroes.domain.search
 import br.com.superheroes.data.model.CharacterDataWrapper
 import br.com.superheroes.data.model.SignData
 import br.com.superheroes.data.search.SearchCharactersRequest
+import br.com.superheroes.domain.favorite.FavoriteRepository
 import br.com.superheroes.library.reactivex.TestSchedulerProvider
 import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.mock
@@ -14,10 +15,12 @@ import org.junit.Test
 class GetCharactersUserCaseTest {
 
     private val charactersRepository = mock<CharactersRepository>()
+    private val favoriteRepository = mock<FavoriteRepository>()
     private val schedulerProvider = TestSchedulerProvider()
 
     private val getCharactersUserCase = GetCharactersUserCase(
         charactersRepository,
+        favoriteRepository,
         schedulerProvider
     )
 

@@ -7,15 +7,11 @@
     android:background="@color/gray97"
     android:orientation="vertical">
 
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="@color/orange"
-        android:elevation="4dp"
-        android:iconifiedByDefault="false"
-        android:queryBackground="@android:color/transparent"
-        android:queryHint="@string/search_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,30 +20,19 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchView"
-        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:spanCount="2"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:itemCount="4"
-        tools:listitem="@layout/search_item" />
-
-    <include
-        android:id="@+id/offlineState"
-        layout="@layout/offline_state"
-        android:visibility="gone"
-        tools:visibility="visible" />
+        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/search_item"
+        tools:spanCount="2" />
 
     <include
         android:id="@+id/searchNotFound"
         layout="@layout/search_not_found_state"
-        android:visibility="gone"
-        tools:visibility="visible" />
-
-    <include
-        android:id="@+id/defaultError"
-        layout="@layout/default_error_state"
         android:visibility="gone"
         tools:visibility="visible" />
 
@@ -61,15 +46,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/openFav"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:backgroundTint="@color/gray97"
-        android:src="@drawable/ic_star_on"
-        android:layout_margin="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

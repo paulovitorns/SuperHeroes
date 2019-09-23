@@ -28,7 +28,8 @@ data class Character(
     val urls: List<Url> = emptyList(),
     val thumbnail: Thumbnail = Thumbnail(),
     val comics: ComicList = ComicList(),
-    val series: SeriesList = SeriesList()
+    val series: SeriesList = SeriesList(),
+    var isFavorite: Boolean = false
 )
 
 @Serializable

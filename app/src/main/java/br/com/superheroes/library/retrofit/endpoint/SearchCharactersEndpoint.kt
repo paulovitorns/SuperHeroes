@@ -20,7 +20,7 @@ interface SearchCharactersEndpoint {
     ): Single<Response<CharacterDataWrapper>>
 
     @GET("v1/public/characters")
-    fun searchCharactersWithoutRed(
+    fun searchCharactersWithoutReference(
         @Query("orderBy") orderBy: String,
         @Query("limit") limit: Int,
         @Query("offset") offset: Int,

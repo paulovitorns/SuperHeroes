@@ -28,7 +28,7 @@ class RemoteCharactersRepository @Inject constructor(
                 handleApiResult(charactersRequest.namesStartWith, response)
             }
         } else {
-            searchCharactersEndpoint.searchCharactersWithoutRed(
+            searchCharactersEndpoint.searchCharactersWithoutReference(
                 orderBy = charactersRequest.orderBy,
                 limit = charactersRequest.limit,
                 offset = charactersRequest.offset,

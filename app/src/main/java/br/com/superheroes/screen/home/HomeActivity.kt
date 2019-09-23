@@ -17,10 +17,12 @@ import br.com.superheroes.library.extension.toast
 import br.com.superheroes.screen.BaseActivity
 import br.com.superheroes.screen.BaseUi
 import br.com.superheroes.screen.detail.HeroActivity
+import br.com.superheroes.screen.favorites.FavoritesActivity
 import com.jakewharton.rxbinding3.widget.queryTextChanges
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_home.defaultError
 import kotlinx.android.synthetic.main.activity_home.offlineState
+import kotlinx.android.synthetic.main.activity_home.openFav
 import kotlinx.android.synthetic.main.activity_home.progress
 import kotlinx.android.synthetic.main.activity_home.recyclerView
 import kotlinx.android.synthetic.main.activity_home.searchNotFound
@@ -71,6 +73,10 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeUi {
             onItemClicked = { character ->
                 presenter.onCharacterSelected(character)
             }
+
+            onFavoriteClicked = { character ->
+                presenter.tapOnFavoriteButton(character)
+            }
         }
 
         with(recyclerView) {
@@ -96,6 +102,12 @@ class HomeActivity : BaseActivity<HomePresenter>(), HomeUi {
         })
 
         retryButton.setOnClickListener { presenter.retryAction() }
+
+        openFav.setOnClickListener {
+            Intent(this, FavoritesActivity::class.java).also {
+                startActivity(it)
+            }
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

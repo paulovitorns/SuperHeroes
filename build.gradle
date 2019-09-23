@@ -6,6 +6,7 @@ buildscript {
         mockito_version = '2.12.0'
         retrofit_version = '2.6.0'
         okhttp3_version = '3.14.2'
+        room_version = '2.2.0-rc01'
     }
     repositories {
         google()

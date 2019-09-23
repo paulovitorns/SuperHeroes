@@ -38,6 +38,10 @@
             android:theme="@style/AppTheme.FullBackgroundColor.Orange" />
 
         <activity
+            android:name=".screen.favorites.FavoritesActivity"
+            android:theme="@style/AppTheme.FullBackgroundColor.Orange" />
+
+        <activity
             android:name=".screen.detail.HeroActivity"
             android:theme="@style/AppTheme.FullBackgroundColor.Orange" />
 
