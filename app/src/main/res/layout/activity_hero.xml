@@ -133,58 +133,81 @@
             <TextView
                 android:id="@+id/sectionComics"
                 style="@style/Text.Body"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:text="@string/section_comics"
                 android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/heroDescription"
                 tools:visibility="visible" />
 
+            <ProgressBar
+                android:id="@+id/progressComics"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="8dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@id/sectionComics"
+                app:layout_constraintTop_toTopOf="@id/sectionComics"
+                tools:visibility="visible" />
+
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/comics"
+                android:id="@+id/comicsRecycler"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal"
                 android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="@id/sectionComics"
-                app:layout_constraintStart_toStartOf="@id/sectionComics"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/sectionComics"
                 tools:itemCount="10"
-                tools:listitem="@layout/hero_publication"
+                tools:listitem="@layout/hero_related_item"
                 tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/sectionSeries"
                 style="@style/Text.Body"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:text="@string/section_series"
                 android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/comics"
+                app:layout_constraintTop_toBottomOf="@id/comicsRecycler"
+                tools:visibility="visible" />
+
+            <ProgressBar
+                android:id="@+id/progressSeries"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="8dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@id/sectionSeries"
+                app:layout_constraintTop_toTopOf="@id/sectionSeries"
                 tools:visibility="visible" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/series"
+                android:id="@+id/seriesRecycler"
                 android:layout_width="0dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:orientation="horizontal"
                 android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="@id/sectionComics"
-                app:layout_constraintStart_toStartOf="@id/sectionComics"
-                app:layout_constraintTop_toBottomOf="@id/sectionComics"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sectionSeries"
                 tools:itemCount="10"
-                tools:listitem="@layout/hero_publication"
+                tools:listitem="@layout/hero_related_item"
                 tools:visibility="visible" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -18,4 +18,14 @@ interface SearchCharactersEndpoint {
         @Query("ts") ts: Long,
         @Query("hash") hash: String
     ): Single<Response<CharacterDataWrapper>>
+
+    @GET("v1/public/characters")
+    fun searchCharactersWithoutRed(
+        @Query("orderBy") orderBy: String,
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int,
+        @Query("apikey") apiKey: String,
+        @Query("ts") ts: Long,
+        @Query("hash") hash: String
+    ): Single<Response<CharacterDataWrapper>>
 }

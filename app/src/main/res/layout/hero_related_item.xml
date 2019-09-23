@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="150dp"
-    android:layout_height="150dp"
+    android:layout_height="wrap_content"
     android:layout_margin="4dp"
     android:foreground="?attr/selectableItemBackgroundBorderless"
     app:cardCornerRadius="5dp"
@@ -17,27 +17,25 @@
         android:background="@android:color/white">
 
         <ImageView
-            android:id="@+id/heroImage"
+            android:id="@+id/itemImage"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:contentDescription="@null"
             android:scaleType="fitCenter"
             android:src="@drawable/hydra_placeholer"
-            app:layout_constraintBottom_toTopOf="@id/superHero"
+            app:layout_constraintBottom_toTopOf="@id/itemTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/superHero"
+            android:id="@+id/itemTitle"
             style="@style/Text.Body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:textAlignment="center"
-            android:maxLines="1"
             android:padding="8dp"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

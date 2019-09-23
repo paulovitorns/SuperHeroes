@@ -22,21 +22,26 @@ class GetCharactersUserCaseTest {
     )
 
     @Test
-    fun `throw an exception trying to create a query with a blank namesStartWith`() {
+    fun `success on fetch characters without a name reference to search`() {
         val request = SearchCharactersRequest(
-            namesStartWith = "",
             offset = 0,
             signData = SignData("", "")
         )
 
+        val result = CharacterDataWrapper()
+
+        given {
+            charactersRepository.fetchCharacters(request)
+        }.willReturn { Single.just(result) }
+
         getCharactersUserCase(request)
             .test()
-            .assertError { error ->
-                error.message == "Missing name parameter"
-            }
-            .assertNotComplete()
-            .assertNoValues()
+            .assertNoErrors()
+            .assertComplete()
+            .assertValue(result.data)
             .awaitTerminalEvent()
+
+        verify(charactersRepository).fetchCharacters(request)
     }
 
     @Test

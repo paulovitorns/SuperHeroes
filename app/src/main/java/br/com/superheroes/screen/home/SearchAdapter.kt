@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import br.com.superheroes.R
 import br.com.superheroes.data.model.Character
@@ -38,6 +39,46 @@ class SearchAdapter(
                 .placeholder(R.drawable.hydra_placeholer)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .into(heroImage)
+        }
+    }
+
+    override fun addItems(newItems: List<Character>) {
+        val oldItems = itemList
+        if (oldItems.isEmpty()) {
+            itemList.addAll(newItems)
+            notifyDataSetChanged()
+        } else {
+            itemList.clear()
+            itemList.addAll(newItems)
+
+            DiffUtil.calculateDiff(object : DiffUtil.Callback() {
+                override fun getOldListSize(): Int = oldItems.size
+
+                override fun getNewListSize(): Int = newItems.size
+
+                override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+                    val oldItem = oldItems.getOrNull(oldItemPosition)
+                    val newItem = newItems[newItemPosition]
+
+                    if (oldItem == null) return false
+
+                    if (oldItem.id == newItem.id) {
+                        return true
+                    }
+
+                    return false
+                }
+
+                override fun areContentsTheSame(
+                    oldItemPosition: Int,
+                    newItemPosition: Int
+                ): Boolean {
+                    val oldItem = oldItems.getOrNull(oldItemPosition)
+                    val newItem = newItems[newItemPosition]
+
+                    return oldItem is Character && oldItem.id == newItem.id
+                }
+            }, false).dispatchUpdatesTo(this)
         }
     }
 

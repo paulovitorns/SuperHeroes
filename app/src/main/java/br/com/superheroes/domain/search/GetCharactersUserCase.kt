@@ -13,9 +13,6 @@ class GetCharactersUserCase @Inject constructor(
 ) {
 
     operator fun invoke(charactersRequest: SearchCharactersRequest): Single<CharacterDataContainer> {
-        if (charactersRequest.namesStartWith.isBlank())
-            return Single.error(IllegalArgumentException("Missing name parameter"))
-
         return charactersRepository.fetchCharacters(charactersRequest)
             .map { it.data }
             .compose(applySingleSchedulers(schedulerProvider))

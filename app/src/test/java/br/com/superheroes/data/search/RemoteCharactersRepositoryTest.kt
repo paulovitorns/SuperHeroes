@@ -61,6 +61,44 @@ class RemoteCharactersRepositoryTest {
     }
 
     @Test
+    fun `success on fetch characters without name reference`() {
+        val request = SearchCharactersRequest(
+            offset = 0,
+            signData = SignData("", "")
+        )
+
+        val result = CharacterDataWrapper(data = CharacterDataContainer(count = 10))
+        val hash = "${request.signData.ts}${request.signData.pvtKey}${request.signData.apiKey}".md5()
+
+        given {
+            getCharactersEndPoint.searchCharactersWithoutRed(
+                orderBy = request.orderBy,
+                limit = request.limit,
+                offset = request.offset,
+                apiKey = request.signData.apiKey,
+                ts = request.signData.ts,
+                hash = hash
+            )
+        }.willReturn { Single.just(Response.success(200, result)) }
+
+        repository.fetchCharacters(request)
+            .test()
+            .assertNoErrors()
+            .assertComplete()
+            .assertValue(result)
+            .awaitTerminalEvent()
+
+        verify(getCharactersEndPoint).searchCharactersWithoutRed(
+            orderBy = request.orderBy,
+            limit = request.limit,
+            offset = request.offset,
+            apiKey = request.signData.apiKey,
+            ts = request.signData.ts,
+            hash = hash
+        )
+    }
+
+    @Test
     fun `success on fetch next page characters result`() {
         val request = SearchCharactersRequest(
             namesStartWith = "Spider-Man",
